@@ -78,5 +78,5 @@ export async function GET(request: NextRequest) {
       `token=${access_token}; Path=/; HttpOnly`
     );
   
-    return NextResponse.redirect(new URL('/', request.url), { headers });
+    return NextResponse.redirect(new URL(request.url).origin, { headers });
 }

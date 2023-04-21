@@ -10,5 +10,5 @@ export async function GET(request: NextRequest){
       `token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`
     );
   
-    return NextResponse.redirect(new URL('/', request.url), { headers });
+    return NextResponse.redirect(new URL(request.url).origin, { headers });
 }
