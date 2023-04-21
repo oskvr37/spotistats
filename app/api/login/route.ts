@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-const SCOPE = "user-read-private user-read-email";
+const SCOPE = "user-read-private user-top-read";
 
 function generateRandomString() {
   var text = "";

@@ -1,17 +1,16 @@
-import { cookies } from 'next/headers';
-
-import Profile from "@/components/Profile"
-
+import Link from "next/link"
+import styles from "./page.module.sass"
 export default function Home() {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get('token')?.value;
-
   return (
     <main>
-      <h1>Spotify Stats</h1>
-
-      {/* @ts-ignore */}
-      <Profile accessToken={accessToken} />
+      <div className={styles.nav}>
+      <Link href="/artists/long_term">
+        Check top artists
+      </Link>
+      <Link href="/tracks/long_term">
+        Check top tracks
+      </Link>
+      </div>
     </main>
   )
 }

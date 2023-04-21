@@ -1,4 +1,9 @@
-import LoginButton from "@/components/LoginButton";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+
+import styles from "./profile.module.sass";
+
+// TODO: handle errors
 
 async function getProfile(accessToken: string) {
   const res = await fetch("https://api.spotify.com/v1/me", {
@@ -22,7 +27,7 @@ export default async function Profile({
 }: {
   accessToken: string;
 }) {
-  const { display_name } = await getProfile(accessToken);
+  const { display_name, images } = await getProfile(accessToken);
 
   if (!display_name) {
     return (
@@ -32,9 +37,15 @@ export default async function Profile({
     );
   }
 
+  const { url } = images[0];
+
   return (
-    <div>
-      <h1>{`Hello, ${display_name}`}</h1>
+    <div className={styles.profile}>
+      <div className={styles.info}>
+        <p>{`Hello, ${display_name}`}</p>
+        <img src={url} alt="profile picture" />
+      </div>
+      <LogoutButton />
     </div>
   );
 }
