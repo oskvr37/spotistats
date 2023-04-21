@@ -1,10 +1,17 @@
+import { cookies } from 'next/headers';
+
+import Profile from "@/components/Profile"
+
 export default function Home() {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('token')?.value;
+
   return (
     <main>
       <h1>Spotify Stats</h1>
-      <button>
-        <a href="http://localhost:3000/api/login">Login</a>
-      </button>
+
+      {/* @ts-ignore */}
+      <Profile accessToken={accessToken} />
     </main>
   )
 }
