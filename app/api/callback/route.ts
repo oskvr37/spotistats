@@ -6,6 +6,10 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
   const { state, code, error } = Object.fromEntries(searchParams);
+  
+  const auth_state = request.cookies.get("AUTH_STATE")?.value;
+
+  console.log('auth_state', auth_state)
 
   // TODO: handle errors
   // if error is `access_denied` then redirect
@@ -18,19 +22,24 @@ export async function GET(request: NextRequest) {
   // app should compare the state parameter that it received in
   // the redirection URI with the state parameter it originally
   // provided to Spotify in the authorization URI
-
+  
   // the state is generated at api/login and passed to Spotify
   // and then is returned from Spotify to api/callback
   // we need to store initial state somewhere to compare it with
   // the state returned from Spotify
+  
+  // the first problem that i encountered is that the state is
+  // stored in cookies and i can't access it from api/callback
+  // because the cookies aren't sent when request was redirected
 
-  const request_state = request.cookies.get("AUTH_STATE")?.value;
-
-  if (!request_state) {
+  // the solution was simple, i had to remove SameSite attribute
+  // from the cookie, so it would be sent with the request
+  
+  if (!auth_state) {
     return NextResponse.json({ error: "invalid_cookies" });
   }
 
-  if (state !== request_state) {
+  if (state !== auth_state) {
     return NextResponse.json({ error: "state_mismatch" });
   }
 

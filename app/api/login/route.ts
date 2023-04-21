@@ -25,7 +25,7 @@ export function GET() {
 
   headers.set(
     "Set-Cookie",
-    `AUTH_STATE=${state}; Path=/; HttpOnly; Secure; SameSite=Strict`
+    `AUTH_STATE=${state}; Path=/api/callback; HttpOnly`
   );
 
   return NextResponse.redirect(redirect_uri, { headers });
