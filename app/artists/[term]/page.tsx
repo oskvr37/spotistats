@@ -35,10 +35,7 @@ export default async function Artists({
 
   if (!accessToken) {
     return (
-      <main>
-        <h1>Top Artists</h1>
         <p>Log in to see your top artists</p>
-      </main>
     );
   }
 

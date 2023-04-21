@@ -31,10 +31,7 @@ export default async function Tracks({ params }: { params: { term: string } }) {
 
   if (!accessToken) {
     return (
-      <main>
-        <h1>Top Artists</h1>
         <p>Log in to see your top tracks</p>
-      </main>
     );
   }
 
